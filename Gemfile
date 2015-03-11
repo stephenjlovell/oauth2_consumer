@@ -14,6 +14,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass'
 
 gem 'devise'  # default user authentication
+gem "omniauth"
+gem "omniauth-idme"
 
 group :test do
   gem 'rspec-rails'
