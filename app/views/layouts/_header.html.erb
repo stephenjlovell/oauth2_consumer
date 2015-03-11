@@ -17,7 +17,8 @@
                 <%= link_to "Sign out #{current_user.email}", destroy_user_session_path, :method => :delete %>
               </li>
             <% else %>
-              <%= link_to "Log in", new_user_session_path %>
+              <li><%= link_to "Log in", new_user_session_path %></li>
+              <li><%= link_to "Log in with ID.me", user_omniauth_authorize_path(:idme) %></li>
             <% end %>
           </ul>
         </li>

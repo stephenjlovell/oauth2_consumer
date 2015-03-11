@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # don't use Devise namespace for omniauth callbacks (will inherit from existing class instead):
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" } 
   resources :products
 
   root to: "products#index"
