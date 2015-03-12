@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.password_required?
-    super && provider.blank?
-  end
+  # def self.password_required?
+  #   provider.blank? && super
+  # end
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   def self.new_with_session(params, session)
     if session["devise.user_attributes"]
 
-      new(session["devise.user_attributes"]) do |user| # removed without_protection
+      new(session["devise.user_attributes"], without_protection: true) do |user| # removed without_protection
         user.attributes = params
         user.valid?
       end

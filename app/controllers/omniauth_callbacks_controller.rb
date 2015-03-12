@@ -1,10 +1,9 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def idme
-
     user = User.from_omniauth(auth_hash)
     if user.persisted?
-      flash[:notice] = "Signed in."
+      # flash[:notice] = "Signed in."
       sign_in_and_redirect user
     else
       # persist attributes in session so validation errors can be displayed if needed.
