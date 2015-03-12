@@ -1,41 +1,36 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :omniauthable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:idme]
 
   validates_presence_of :username # Devise won't do this by default.
-
-  def update_with_password(params, *options)
-    if encrypted_password.blank?
-      update_attributes(params, *options)
-    else
-      super
-    end
-  end
-
-  # def self.password_required?
-  #   provider.blank? && super
-  # end
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
-      user.username = auth.info.nickname
+      if auth.info[:affiliation]
+        user.affiliation = auth.info[:affiliation]
+      end
     end
   end
 
-  def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
+  # If using ID.me as SSO, additional info such as email would be available in authorization hash.
 
-      new(session["devise.user_attributes"], without_protection: true) do |user| # removed without_protection
-        user.attributes = params
-        user.valid?
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.user_attributes"] 
+        user.attributes = data
       end
-    else
-      super
-    end    
+    end
   end
 
 end
+
+
+
+
+
+
