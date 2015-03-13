@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
     puts auth.inspect
     # puts auth.slice(:provider, :uid).inspect
     where(auth.slice(:provider, :uid)).first_or_create do |u|
-      u.provider = auth.provider
-      u.uid = auth.uid
+      u.provider = auth[:provider]
+      u.uid = auth[:uid]
       if auth[:info][:verified]
-        u.affiliation = auth.info[:affiliation]
+        u.affiliation = auth[:info][:affiliation]
       end
     end
   end

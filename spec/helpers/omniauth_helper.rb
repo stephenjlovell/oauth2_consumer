@@ -28,5 +28,6 @@ end
 # invalid_scope               The requested scope is invalid, unknown, or malformed.
 
 def oauth_config_failure(message:)
+  OmniAuth.config.mock_auth[:idme] = nil  # reset mock 
   OmniAuth.config.mock_auth[:idme] = message
 end

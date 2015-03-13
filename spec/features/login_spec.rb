@@ -5,20 +5,44 @@ describe 'Log-In' do
 
   context 'using ID.me' do
 
-    context 'authenticated users only' do
+    context 'authenticated users' do
+
+      context 'with existing accounts' do
+        before do
+          @user_attributes = FactoryGirl.attributes_for(:verified_idme_user)
+          @user = User.create!(@user_attributes)
+          oauth_config_success
+        end
+
+        it 'can sign in via ID.me' do
+          visit '/users/auth/idme'
+          expect(page).to have_content 'Successfully authenticated from ID.me account.'
+        end
+      end
+
+      context 'without existing accounts' do
+        before do
+          oauth_config_success
+        end
+
+        it 'must create a username and password' do
+          visit '/users/auth/idme'
+          expect(page).to have_content 'Sign up'
+        end
+      end
+
+    end
+
+    context 'failed authentication' do
       before do
-        @user_attributes = FactoryGirl.attributes_for(:verified_idme_user)
-        @user = User.create!(@user_attributes)
-        oauth_config_success
+        oauth_config_failure(message: :access_denied)
       end
-
-      let(:username) { @user_attributes[:username] }
-      let(:password) { @user_attributes[:password] }
-
-      it "allows signin to authenticated ID.me users" do
+      it 'prevents sign in' do
         visit '/users/auth/idme'
-        expect(page).to have_content 'Successfully authenticated from ID.me account.'
+        expect(page).to_not have_content 'Successfully authenticated from ID.me account.'
+        expect(page).to have_content 'Could not authenticate you'
       end
+
     end
 
   end
