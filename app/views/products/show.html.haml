@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Title:
+  = @product.title
+%p
+  %strong Description:
+  = @product.description
+%p
+  %strong Price:
+  = @product.price
+%p
+  %strong Image url:
+  = @product.image_url
+%p
+  %strong Stock:
+  = @product.stock
+= link_to 'Edit', edit_product_path(@product)
+|
+= link_to 'Back', products_path

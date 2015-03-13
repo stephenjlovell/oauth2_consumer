@@ -1,0 +1,22 @@
+%body
+  %header
+    %nav.navbar.navbar-default{:role => "navigation"}
+      .container-fluid
+        .navbar-header
+          %a.navbar-brand{:href => "/"}
+        %ul.nav.navbar-nav.navbar-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Menu
+              %span.caret
+            %ul.dropdown-menu{:role => "menu"}
+              - if user_signed_in?
+                %li= link_to 'My Cart', "#"
+                %li= link_to 'My Deals', "#"
+                %li.divider
+                %li= link_to 'My Profile', "#"
+                %li
+                  = link_to "Sign out #{current_user.email}", destroy_user_session_path, :method => :delete
+              - else
+                %li= link_to "Log in", new_user_session_path
+                %li= link_to "Log in with ID.me", user_omniauth_authorize_path(:idme)

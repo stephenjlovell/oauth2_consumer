@@ -12,6 +12,9 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'bootstrap-sass'
 
+# switch to HAML for templating:
+gem "haml-rails"
+
 # User authentication:
 gem 'devise'  
 gem "omniauth"
