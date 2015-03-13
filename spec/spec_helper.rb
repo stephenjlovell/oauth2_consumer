@@ -1,6 +1,6 @@
 require 'capybara/rspec'
 require 'factory_girl_rails'
-# require 'factories'
+require 'database_cleaner'
 
 RSpec.configure do |config|
 
@@ -13,5 +13,17 @@ RSpec.configure do |config|
   end
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
 end

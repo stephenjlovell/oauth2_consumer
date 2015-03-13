@@ -12,7 +12,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'bootstrap-sass'
 
-gem 'devise'  # default user authentication
+# User authentication:
+gem 'devise'  
 gem "omniauth"
 gem "omniauth-idme"
 
@@ -20,6 +21,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'faker'
 end
 
 group :development do
@@ -28,6 +30,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :production do 

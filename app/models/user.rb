@@ -8,14 +8,11 @@ class User < ActiveRecord::Base
   validates_presence_of :username # Devise won't do this by default.
 
   def self.from_omniauth(auth)
-    puts auth.inspect
-    # puts auth.slice(:provider, :uid).inspect
     where(auth.slice(:provider, :uid)).first_or_create do |u|
       u.provider = auth[:provider]
       u.uid = auth[:uid]
-      if auth[:info][:verified]
-        u.affiliation = auth[:info][:affiliation]
-      end
+      u.verified = auth[:info][:verified]
+      u.affiliation = auth[:info][:affiliation]
     end
   end
 
@@ -24,7 +21,8 @@ class User < ActiveRecord::Base
   def self.new_with_session(params, session)
     super.tap do |u|
       if data = session["devise.user_attributes"] 
-        u.attributes = data
+        u.attributes = ActionController::Parameters.new(data)
+          .permit(:provider, :uid, :affiliation, :verified)
       end
     end
   end

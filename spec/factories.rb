@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryGirl.define do
  
   # user schema:
@@ -20,16 +22,17 @@ FactoryGirl.define do
 
   # Returns virtual attributes, not database attributes.
   factory :user do
-    email "CPTWintersRET@example.mil"
-    username "richarddwinters"
-    password "EasyCo506"
-    password_confirmation "EasyCo506"
+    sequence(:email) {|n| Faker::Internet.email }
+    sequence(:username) {|n| Faker::Internet.user_name } 
+    sequence(:password) {|n| Faker::Internet.password(8) } 
 
     factory :idme_user do
       provider "IDme"
-      uid "12345"
+      sequence(:uid) {|n| Faker::Number.number(6) }
+      sequence(:affiliation) {|n| n%2 > 0 ? "Retired" : "Veteran" } 
+      
       factory :verified_idme_user do
-        affiliation "Retired"
+        verified true
       end
     end
   end
