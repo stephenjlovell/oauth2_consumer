@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username # Devise won't do this by default.
 
+  has_many :orders, dependent: :destroy
+  has_many :addresses, dependent: :destroy
+
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |u|
       u.provider = auth[:provider]

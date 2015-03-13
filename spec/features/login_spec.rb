@@ -53,7 +53,7 @@ feature 'Log-In' do
       it 'prevents sign in' do
         visit '/users/auth/idme'
         expect(page).to_not have_content 'Successfully authenticated from ID.me account.'
-        # expect(page).to have_content 'Could not authenticate you'
+        expect(page).to have_content 'Could not authenticate you'
       end
     end
   end
@@ -77,5 +77,4 @@ feature 'Log-In' do
       expect(page).to have_content 'Signed in successfully'
     end
   end
-  
 end
