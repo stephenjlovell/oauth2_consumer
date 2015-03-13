@@ -19,12 +19,14 @@ gem "omniauth-idme"
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl_rails'
+end
+
+group :development do
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'factory_girl_rails'
 end
 
 group :production do 
