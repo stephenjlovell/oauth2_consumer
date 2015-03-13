@@ -14,11 +14,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  protected
-
   def auth_hash
-    puts request.env["omniauth.auth"].inspect    
-    request.env["omniauth.auth"]
+    ActionController::Parameters.new(request.env["omniauth.auth"])
+      .permit(:provider, :uid, info: [:affiliation, :verified])
   end
+  protected :auth_hash
+
+
+
+
 
 end

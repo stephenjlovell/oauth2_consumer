@@ -8,11 +8,13 @@ class User < ActiveRecord::Base
   validates_presence_of :username # Devise won't do this by default.
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      if auth.info[:affiliation]
-        user.affiliation = auth.info[:affiliation]
+    puts auth.inspect
+    # puts auth.slice(:provider, :uid).inspect
+    where(auth.slice(:provider, :uid)).first_or_create do |u|
+      u.provider = auth.provider
+      u.uid = auth.uid
+      if auth[:info][:verified]
+        u.affiliation = auth.info[:affiliation]
       end
     end
   end
@@ -20,9 +22,9 @@ class User < ActiveRecord::Base
   # If using ID.me as SSO, additional info such as email would be available in authorization hash.
 
   def self.new_with_session(params, session)
-    super.tap do |user|
+    super.tap do |u|
       if data = session["devise.user_attributes"] 
-        user.attributes = data
+        u.attributes = data
       end
     end
   end

@@ -19,6 +19,7 @@ gem "omniauth-idme"
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development do

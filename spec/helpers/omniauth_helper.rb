@@ -1,14 +1,16 @@
 require 'omniauth'
+require 'devise'
 
 OmniAuth.config.test_mode = true
 
-def config_success
+def oauth_config_success
   OmniAuth.config.mock_auth[:idme] = nil  # reset mock 
+
   OmniAuth.config.mock_auth[:idme] = OmniAuth::AuthHash.new({
     provider: 'IDme',
-    uid: '123545',
+    uid: '12345',
     info: {
-      affiliation: 'Veteran',
+      affiliation: 'Retired',
       verified: true
     }
   })
@@ -25,6 +27,6 @@ end
 # unsupported_response_type   The requested response type is not supported by the authorization server.
 # invalid_scope               The requested scope is invalid, unknown, or malformed.
 
-def config_failure(message:)
+def oauth_config_failure(message:)
   OmniAuth.config.mock_auth[:idme] = message
 end

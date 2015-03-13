@@ -25,13 +25,13 @@ FactoryGirl.define do
     password "EasyCo506"
     password_confirmation "EasyCo506"
 
-    # factory :idme_user do
-    #   provider "IDme"
-    #   uid "12345"
-    #   factory :verified_idme_user do
-    #     affiliation "Retired"
-    #   end
-    # end
+    factory :idme_user do
+      provider "IDme"
+      uid "12345"
+      factory :verified_idme_user do
+        affiliation "Retired"
+      end
+    end
   end
   
 end
