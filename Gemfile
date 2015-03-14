@@ -21,11 +21,12 @@ gem 'devise'
 gem "omniauth"
 gem "omniauth-idme"
 
+gem 'faker'
+
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'faker'
 end
 
 group :development do
