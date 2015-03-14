@@ -3,7 +3,8 @@
     %nav.navbar.navbar-default{:role => "navigation"}
       .container-fluid
         .navbar-header
-          %a.navbar-brand{:href => "/"}
+          %strong
+            %a.navbar-brand{:href => "/"} Implausible Products
         %ul.nav.navbar-nav.navbar-right
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -11,10 +12,10 @@
               %span.caret
             %ul.dropdown-menu{:role => "menu"}
               - if user_signed_in?
-                %li= link_to 'My Cart', "#"
+                %li= link_to 'My Cart', order_items_path
                 %li= link_to 'My Deals', "#"
                 %li.divider
-                %li= link_to 'My Profile', "#"
+                %li= link_to 'My Profile', edit_user_registration_path
                 %li
                   = link_to "Sign out #{current_user.email}", destroy_user_session_path, :method => :delete
               - else
