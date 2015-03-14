@@ -15,5 +15,5 @@
           %td= link_to product.name, product
           %td= product.description
           %td= number_to_currency(product.price, precision: 2)
-          %td= product.stock > 0 ? new_order_items_path(product) : "Out of stock"
+          %td= product.stock > 0 ? "Available" : "Out of stock"
 
