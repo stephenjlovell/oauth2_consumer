@@ -4,6 +4,11 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
 
+  resources :order_items
+  get 'order_items/add/(:product_id)', to: 'order_items#create', as: "add_order_item"
+
+  resources :orders
+
   root to: "products#index"
 
 end
