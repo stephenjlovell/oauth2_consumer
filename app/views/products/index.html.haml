@@ -1,22 +1,19 @@
-%h1 Listing Products
-%table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Price
-      %th Image url
-      %th Stock
-      %th{:colspan => "3"}
-  %tbody
-    - @products.each do |product|
+%h1 Our Products
+
+.table-responsive
+  %table.table.table-hover
+    %thead
       %tr
-        %td= product.title
-        %td= product.description
-        %td= product.price
-        %td= product.image_url
-        %td= product.stock
-        %td= link_to 'Show', product
-        %td= link_to 'Edit', edit_product_path(product)
-        %td= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+        %th Name
+        %th Description
+        %th Price
+        %th Availability
+        %th{:colspan => "3"}
+    %tbody
+      - @products.each do |product|
+        %tr
+          %td= link_to product.name, product
+          %td= product.description
+          %td= number_to_currency(product.price, precision: 2)
+          %td= product.stock > 0 ? new_order_items_path(product) : "Out of stock"
+

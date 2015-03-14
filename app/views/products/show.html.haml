@@ -1,19 +1,14 @@
-%p#notice= notice
 %p
-  %strong Title:
-  = @product.title
+  %strong Name:
+  = @product.name
 %p
   %strong Description:
   = @product.description
 %p
   %strong Price:
-  = @product.price
-%p
-  %strong Image url:
-  = @product.image_url
+  = number_to_currency(@product.price, precision: 2)
 %p
   %strong Stock:
-  = @product.stock
-= link_to 'Edit', edit_product_path(@product)
-|
+  = @product.stock > 0 ? "Available" : "Out of stock"
+
 = link_to 'Back', products_path
