@@ -1,14 +1,14 @@
-%p
-  %strong Name:
-  = @product.name
-%p
-  %strong Description:
-  = @product.description
-%p
-  %strong Price:
-  = number_to_currency(@product.price, precision: 2)
-%p
-  %strong Stock:
-  = @product.stock > 0 ? "Available" : "Out of stock"
-
-= link_to 'Back', products_path
+%jumbotron
+  %h1
+    = @product.name
+  %p
+    = @product.description
+  %p
+    %strong Price:
+    = number_to_currency(@product.price, precision: 2)
+  %p
+    %strong Stock:
+    = @product.stock > 0 ? "Available" : "Out of stock"
+  %p
+    = link_to "Back", :back, class: "btn btn-primary btn-default"
+    = link_to "Add to cart", add_order_item_path(product_id: @product.id), class: "btn btn-primary btn-default"

@@ -14,8 +14,9 @@
           %td= link_to product.name, product
           %td= product.description
           %td= number_to_currency(product.price, precision: 2)
-          - if product.stock > 0
-            %td= button_to "Add to Cart", add_order_item_path(product_id: product.id)
-          - else
-            %td= "Out of stock"
+          %td
+            - if product.stock > 0
+              = button_to "Add to Cart", add_order_item_path(product_id: product.id), class: "btn btn-primary btn-default"
+            - else
+              "Out of stock"
 

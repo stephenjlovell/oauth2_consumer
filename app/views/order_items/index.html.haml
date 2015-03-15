@@ -36,7 +36,8 @@
       %tr
         %td{colspan: "3"}
         %td 
-          = button_to "Submit", checkout_order_path, method: :patch
+          %p= button_to "Checkout", checkout_order_path, method: :patch, class: "btn btn-primary btn-default"
+          %p= link_to "Continue shopping", root_path, class: "btn btn-primary btn-default"
     %tbody
       - @order_items.each do |item|
         %tr
