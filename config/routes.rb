@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post 'order_items/add/(:product_id)', to: 'order_items#create', as: "add_order_item"
   patch 'order_items/update', to: 'order_items#update', as: "update_order_item"
 
-  resources :orders
+  patch 'orders/checkout', to: 'orders#checkout', as: "checkout_order"
 
   root to: "products#index"
 

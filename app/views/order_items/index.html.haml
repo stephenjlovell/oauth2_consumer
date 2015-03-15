@@ -1,4 +1,4 @@
-%h3 Your items (#{@order_items.count}):
+%h3 Your items (#{@order.item_count}):
 
 .table-responsive
   %table.table.table-hover
@@ -33,6 +33,10 @@
           %strong Total: 
         %td 
           %strong #{number_to_currency(@order.total, precision: 2)}
+      %tr
+        %td{colspan: "3"}
+        %td 
+          = button_to "Submit", checkout_order_path, method: :patch
     %tbody
       - @order_items.each do |item|
         %tr
@@ -40,7 +44,9 @@
           %td= number_to_currency(item.product.price, precision: 2)
           %td
             = form_for(item) do |f| 
-              = f.number_field :quantity
+              = f.number_field :quantity, min: 0
               = f.submit "update"
           %td= number_to_currency(item.subtotal, precision: 2)
+
+
 

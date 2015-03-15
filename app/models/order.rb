@@ -6,7 +6,11 @@ class Order < ActiveRecord::Base
   extend FirstOrBuild
 
   def subtotal
-    order_items.map(&:subtotal).reduce(:+)
+    order_items.map(&:subtotal).reduce(:+) || 0
+  end
+
+  def item_count
+    order_items.map(&:quantity).reduce(:+) || 0
   end
 
   def discount
@@ -14,11 +18,13 @@ class Order < ActiveRecord::Base
   end
 
   def shipping
-    order_items.map(&:quantity).reduce(:+) * 2.50
+    item_count * 2.50
   end
 
   def total
     subtotal + shipping - discount
   end
+
+
 
 end

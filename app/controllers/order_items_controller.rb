@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
 
   def update
     OrderItem.find(params[:id]).update(update_params)
-    flash[:success] = 'cart updated.'
+    flash[:success] = 'Shopping cart updated.'
     redirect_to order_items_path
   end
 
