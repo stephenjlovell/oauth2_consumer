@@ -21,5 +21,4 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected :auth_hash
 
 
-
 end
