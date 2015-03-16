@@ -11,6 +11,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 gem 'bootstrap-sass'
+gem 'will_paginate', '> 3.0'
+gem 'bootstrap-will_paginate'
 
 # switch to HAML for templating:
 gem "haml"

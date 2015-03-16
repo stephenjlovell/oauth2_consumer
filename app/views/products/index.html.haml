@@ -1,7 +1,7 @@
 = render 'shared/idme_troop'
 
-%h3.page-header Our Products
-
+%h3.page-header#main-products-header Our Products
+= will_paginate @products
 .table-responsive
   %table.table.table-hover
     %thead
@@ -21,4 +21,4 @@
               = button_to "Add to Cart", add_order_item_path(product_id: product.id), class: "btn btn-primary btn-default"
             - else
               "Out of stock"
-
+= will_paginate @products

@@ -2,7 +2,7 @@
 require 'faker'
 
 if Product.all.count == 0
-  75.times do 
+  100.times do 
     Product.create!({
       name: Faker::Commerce.product_name,
       price: Faker::Commerce.price,
