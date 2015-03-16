@@ -1,4 +1,4 @@
-- if session["devise.omniauth_raw"]
+- if @omniauth_raw
   = render 'omniauth_callbacks/payload_display'
 - else
   = render 'shared/idme_troop'
