@@ -14,7 +14,20 @@ class Order < ActiveRecord::Base
   end
 
   def discount
-    0
+    if user && user.verified?
+      case user.affiliation
+      when "veteran", "retired"
+        0.1
+      else
+        0.0
+      end 
+    else
+      0.0
+    end
+  end
+
+  def total_discount
+    subtotal * discount 
   end
 
   def shipping
@@ -22,7 +35,7 @@ class Order < ActiveRecord::Base
   end
 
   def total
-    subtotal + shipping - discount
+    (subtotal * (1 - discount)) + shipping
   end
 
 

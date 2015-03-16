@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   def checkout
     Order.find(session[:order_id]).update(status: "submitted")
 
-    flash[:success] = "Thank you for shopping with us! A confirmation email will be arriving soon."
+    flash[:success] = "Thank you for shopping with us! If we were a real company, " +
+                      "an email confirmation would be arriving soon."
     redirect_to root_path
     session[:order_id] = nil  
   end

@@ -1,4 +1,4 @@
-%h3 Your items (#{@order.item_count}):
+%h3.page-header Your items (#{@order.item_count}):
 
 .table-responsive
   %table.table.table-hover
@@ -8,6 +8,16 @@
         %th Price
         %th Quantity
         %th Subtotal
+    %tbody
+      - @order_items.each do |item|
+        %tr
+          %td= link_to item.product.name, product_path(item.product.id)
+          %td= number_to_currency(item.product.price, precision: 2)
+          %td
+            = form_for(item) do |f| 
+              = f.number_field :quantity, min: 0
+              = f.submit "update"
+          %td= number_to_currency(item.subtotal, precision: 2)
     %tfoot
       %tr
         %td{colspan: "2"}
@@ -20,7 +30,7 @@
         %td 
           %strong Discount: 
         %td 
-          %strong #{number_to_currency(@order.discount, precision: 2)}
+          %strong #{number_to_currency(@order.total_discount, precision: 2)}
       %tr
         %td{colspan: "2"}
         %td 
@@ -35,19 +45,10 @@
           %strong #{number_to_currency(@order.total, precision: 2)}
       %tr
         %td{colspan: "3"}
-        %td 
-          %p= button_to "Checkout", checkout_order_path, method: :patch, class: "btn btn-primary btn-default"
+        %td
+          - if @order.item_count > 0
+            %p= button_to "Checkout", checkout_order_path, method: :patch, class: "btn btn-primary btn-default"
           %p= link_to "Continue shopping", root_path, class: "btn btn-primary btn-default"
-    %tbody
-      - @order_items.each do |item|
-        %tr
-          %td= link_to item.product.name, product_path(item.product.id)
-          %td= number_to_currency(item.product.price, precision: 2)
-          %td
-            = form_for(item) do |f| 
-              = f.number_field :quantity, min: 0
-              = f.submit "update"
-          %td= number_to_currency(item.subtotal, precision: 2)
 
 
 

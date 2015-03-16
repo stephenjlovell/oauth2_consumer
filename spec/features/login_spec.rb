@@ -5,7 +5,7 @@ feature 'Log-In' do
 
   context 'using ID.me' do
 
-    context 'authenticated users' do
+    describe 'authenticated users' do
 
       context 'with existing accounts' do
         before :context do
@@ -45,7 +45,7 @@ feature 'Log-In' do
       end
     end
 
-    context 'failed authentication' do
+    describe 'failed authentication' do
       before :context do
         oauth_config_failure(message: :access_denied)
       end

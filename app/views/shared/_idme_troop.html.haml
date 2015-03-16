@@ -10,10 +10,10 @@
         %img.idme-btn-primary-sm-Troop{:alt => "Verify with ID.me Troop ID", :border => "0", :src => "https://s3.amazonaws.com/idme/buttons/new/btn-primary-sm-Troop.png"}/
       %span.idme-btn-affinity 
         Retired or active-duty military? 
-        = link_to " log in ", user_omniauth_authorize_path(:idme)
-        with ID.me and receive 10% off your purchase!
+        = link_to " log in with ID.me ", user_omniauth_authorize_path(:idme)
+        and receive 10% off your purchase!
       %span.idme-btn-verification
         %img.idme-btn-lock{:alt => "Lock", :src => "https://s3.amazonaws.com/idme/assets/lock.png", :width => "8"}>/
         = " Verification by ID.me"
         %br/
-        %a#modal-open{:href => "#"} • What is ID.me?
+        %a#modal-open{:href => "https://www.id.me/how-it-works"} • What is ID.me?
