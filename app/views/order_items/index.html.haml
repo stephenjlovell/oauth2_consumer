@@ -16,7 +16,7 @@
           %td
             = form_for(item) do |f| 
               = f.number_field :quantity, min: 0
-              = f.submit "update"
+              = f.submit "update", class: "btn btn-sm btn-default"
           %td= number_to_currency(item.subtotal, precision: 2)
     %tfoot
       %tr
@@ -30,7 +30,7 @@
         %td 
           %strong Discount: 
         %td 
-          %strong #{number_to_currency(@order.total_discount, precision: 2)}
+          %strong #{number_to_currency(@order.discount, precision: 2)}
       %tr
         %td{colspan: "2"}
         %td 

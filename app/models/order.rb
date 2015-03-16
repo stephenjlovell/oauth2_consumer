@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
     order_items.map(&:quantity).reduce(:+) || 0
   end
 
-  def discount
+  def percent_discount
     if user && user.verified?
       case user.affiliation
       when "veteran", "retired"
@@ -26,8 +26,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def total_discount
-    subtotal * discount 
+  def discount
+    -(subtotal * percent_discount) 
   end
 
   def shipping
@@ -35,7 +35,7 @@ class Order < ActiveRecord::Base
   end
 
   def total
-    (subtotal * (1 - discount)) + shipping
+    (subtotal * (1 - percent_discount)) + shipping
   end
 
 
