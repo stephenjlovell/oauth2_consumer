@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @omniauth_raw = session["devise.omniauth_raw"]
+    @omniauth_raw = session.delete("omniauth_raw")
     @products = Product.order("name").page(params[:page]).per_page(20)
   end
 

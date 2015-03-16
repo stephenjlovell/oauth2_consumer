@@ -17,7 +17,7 @@ feature 'Log-In' do
 
         it 'can sign in via ID.me' do
           visit '/users/auth/idme'
-          # expect(page).to have_content 'Omniauth Callback'
+          expect(page).to have_content 'Omniauth Callback'
           expect(page).to have_content 'Successfully authenticated from ID.me account.'
         end
       end

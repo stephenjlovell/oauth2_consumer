@@ -18,7 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env["omniauth.auth"]
     # persist raw response in session to display to user when signed in.
     # devise will remove the hash later when the session is destroyed.
-    session["devise.omniauth_raw"] = auth[:extra][:raw] || auth || ''
+    session["omniauth_raw"] = auth[:extra][:raw]
     ActionController::Parameters.new(auth)
       .permit(:provider, :uid, info: [:affiliation, :verified])
   end
