@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
       u.provider = auth[:provider]
       u.uid = auth[:uid]
       u.verified = auth[:info][:verified]
-      u.affiliation = auth[:info][:affiliation].downcase
+      u.affiliation = auth[:info][:affiliation]
     end
   end
 

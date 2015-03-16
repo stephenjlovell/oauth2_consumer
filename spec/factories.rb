@@ -29,7 +29,7 @@ FactoryGirl.define do
     factory :idme_user do
       provider "IDme"
       sequence(:uid) {|n| Faker::Number.number(6) }
-      sequence(:affiliation) {|n| n%2 > 0 ? "retired" : "veteran" } 
+      sequence(:affiliation) {|n| n%2 > 0 ? "Retiree" : "Veteran" } 
       
       factory :verified_idme_user do
         verified true

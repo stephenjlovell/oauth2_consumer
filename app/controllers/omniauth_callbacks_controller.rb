@@ -15,7 +15,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def auth_hash
-    ActionController::Parameters.new(request.env["omniauth.auth"])
+    auth = request.env["omniauth.auth"]
+    # persist Omniauth::AuthHash in session to display to user when signed in.
+    # devise will remove the hash later when the session is destroyed.
+    session["devise.omniauth_hash"] = auth
+    ActionController::Parameters.new(auth)
       .permit(:provider, :uid, info: [:affiliation, :verified])
   end
   protected :auth_hash

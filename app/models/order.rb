@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
   def percent_discount
     if user && user.verified?
       case user.affiliation
-      when "veteran", "retired"
+      when "Service Member", "Veteran", "Military Spouse", "Military Family", "Retiree"
         0.1
       else
         0.0
