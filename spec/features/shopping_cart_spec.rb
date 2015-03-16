@@ -1,6 +1,7 @@
 require 'rails_helper.rb'
 require 'helpers/omniauth_helper'
 
+# Make sure to seed the test database prior to running this spec.
 feature "shopping cart" do
 
   context "when logged in" do

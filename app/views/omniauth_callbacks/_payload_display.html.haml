@@ -6,3 +6,4 @@
         %span.sr-only Close
       .panel-title Omniauth Callback
     .panel-body
+      = "#{session.delete("devise.omniauth_raw")}"

@@ -3,7 +3,7 @@ require 'devise'
 
 OmniAuth.config.test_mode = true
 
-def oauth_config_success(uid: '12345', affiliation: 'Veteran', verified: true)
+def oauth_config_success(uid: '891ad77c706e1edc1', affiliation: 'Veteran', verified: true)
   OmniAuth.config.mock_auth[:idme] = nil  # reset mock 
 
   OmniAuth.config.mock_auth[:idme] = OmniAuth::AuthHash.new({
@@ -12,9 +12,10 @@ def oauth_config_success(uid: '12345', affiliation: 'Veteran', verified: true)
     info: {
       affiliation: affiliation,
       verified: verified
-    }
-    extra: {
-
+    },
+    extra: { raw: { "id" => uid, 
+                    "verified" => true, 
+                    "affiliation" => "Veteran" } 
     }
   })
 end

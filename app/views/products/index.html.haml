@@ -1,4 +1,7 @@
-= render 'shared/idme_troop'
+- if session["devise.omniauth_raw"]
+  = render 'omniauth_callbacks/payload_display'
+- else
+  = render 'shared/idme_troop'
 
 %h3.page-header#main-products-header Our Products
 = will_paginate @products
