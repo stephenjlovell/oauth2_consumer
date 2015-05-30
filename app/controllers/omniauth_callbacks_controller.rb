@@ -15,7 +15,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def auth_hash
-    puts request.inspect
+    # puts request.inspect
     auth = request.env["omniauth.auth"]
     # persist raw response in session to display to user when signed in.
     # devise will remove the hash later when the session is destroyed.
